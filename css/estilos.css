@@ -1,0 +1,406 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    /* ------------ */
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 20px;
+}
+
+.contenedor {
+    width: 100%;
+    height: 100%;
+    /* ------------ */
+    display: flex;
+    /* ------------ */
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    /* ------------ */
+    width: 40%;
+    height: 80%;
+    /* ------------ */
+    border: 2px solid black;
+    /* ------------ */
+    justify-content: center;
+}
+
+.registro {
+    display: flex;
+    flex-direction: column;
+    /* ------------ */
+    width: 40%;
+    height: 80%;
+    /* ------------ */
+    border: 2px solid black;
+    /* ------------ */
+    justify-content: center;
+}
+
+.margin_p_login {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.botonesPrincipales {
+    width: 30%;
+    height: 30px;
+    /* -------------- */
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 18px;
+    /* -------------- */
+    border-color: black;
+}
+
+#contenedorJuego button,
+#contenedorJuego span {
+    width: 75%;
+    height: 75%;
+    /* -------------- */
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 20px;
+    /* -------------- */
+    border-color: black;
+}
+
+#contenedorJuego h3 {
+    margin: 0;
+}
+
+#contenedorJuego {
+    width: 100%;
+    height: 100%;
+    /* -------- */
+    display: grid;
+    grid-template-rows: 2fr 2fr 6fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "j1 j2 j3 j4" "j5 j6 j7 j8" "mesa mesa mesa apostar";
+    /* -------- */
+    /*background-color: aquamarine;*/
+    background: radial-gradient(ellipse at center, rgba(130, 201, 60, 1) 15%, rgba(130, 201, 60, 1) 20%, rgba(92, 173, 45, 1) 67%, rgba(92, 173, 45, 1) 88%);
+}
+
+.displayJugadores {
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-areas: "jugador hueco1 hueco2" "jugador carta1 carta2" "jugador hueco hueco";
+}
+
+.jugador {
+    margin: 1%;
+    /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.mesa {
+    margin: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    /* -------- */
+    border-radius: 500px;
+    border: 3px solid rgb(138, 149, 151);
+    box-sizing: border-box;
+    /* -------- */
+    grid-area: mesa;
+    background-color: darkslategray;
+    /* -------- */
+    display: flex;
+    flex-direction: column;
+    /* -------- */
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.mesaInterior {
+    width: 90%;
+    height: 80%;
+    /* -------- */
+    border-radius: 500px;
+    border: 3px solid rgb(138, 149, 151);
+    box-sizing: border-box;
+    /* -------- */
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr 1fr;
+    grid-template-areas: ". . . . . . . ." ". mazo carta1 carta2 carta3 carta4 carta5 ." ". . . . . . . .";
+}
+
+.apostar {
+    margin: 1%;
+    /* -------- */
+    grid-area: apostar;
+    /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 3fr 10fr 1fr 10fr 3fr;
+    grid-template-areas: "botones botones botones botones botones" "sitio1 carta1 sitio2 carta2 sitio3";
+}
+
+.puesto {
+    margin: 3%;
+    /* -------- */
+    grid-area: jugador;
+    background: radial-gradient(ellipse at center, rgba(107, 36, 0, 1) 16%, rgba(107, 36, 0, 1) 30%, rgba(169, 57, 0, 1) 91%, rgba(173, 58, 0, 1) 95%, rgba(107, 36, 0, 1) 100%);
+    /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.carta1 {
+    margin: 1%;
+    margin-right: 10%;
+    /* -------- */
+    border-radius: 6px;
+    /* -------- */
+    grid-area: carta1;
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.carta2 {
+    margin: 1%;
+    margin-right: 10%;
+    /* -------- */
+    border-radius: 6px;
+    /* -------- */
+    grid-area: carta2;
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.check1 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    /* -------- */
+    margin: 1%;
+    margin-right: 10%;
+    /* -------- */
+    grid-area: hueco1;
+}
+
+.check2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    /* -------- */
+    margin: 1%;
+    margin-right: 10%;
+    /* -------- */
+    grid-area: hueco2;
+}
+
+.botonesApuestas {
+    grid-area: botones;
+    /* Poner flexible */
+    display: flex;
+    flex-direction: column;
+    /* -------------- */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.pasar {
+    display: flex;
+    width: 90%;
+    height: 20%;
+    /* -------------- */
+    margin: 2%;
+    /* -------------- */
+    justify-content: center;
+    align-items: center;
+    /* -------------- */
+    background-color: rgb(102, 102, 185);
+}
+
+.retiro {
+    display: flex;
+    width: 90%;
+    height: 20%;
+    /* -------------- */
+    margin: 2%;
+    /* -------------- */
+    justify-content: center;
+    align-items: center;
+    /* -------------- */
+    background-color: rgb(122, 206, 122);
+}
+
+.subir {
+    display: flex;
+    width: 90%;
+    height: 20%;
+    /* -------------- */
+    margin: 2%;
+    /* -------------- */
+    justify-content: center;
+    align-items: center;
+    /* -------------- */
+    background-color: rgb(194, 115, 115);
+}
+
+.barra {
+    display: flex;
+    width: 80%;
+    margin-top: 5%;
+    /* -------------- */
+    justify-content: center;
+    align-items: center;
+}
+
+.cartaPropia1 {
+    margin: 3%;
+    /* -------- */
+    grid-area: carta1;
+    /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    border-radius: 12px;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.cartaPropia2 {
+    margin: 3%;
+    /* -------- */
+    grid-area: carta2;
+    /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    border-radius: 12px;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.mazo {
+    width: 100%;
+    height: 100%;
+    /* -------- */
+    /*margin-right: 5%;*/
+    /* -------- */
+    border-radius: 12px;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* -------- */
+    /*animation-name: animacarta;
+    animation-duration: 2s;*/
+    /* -------- */
+    grid-area: mazo;
+}
+
+.cartasMesa {
+    width: 12%;
+    height: 40%;
+    /*transform: translate(50px, 50px);*/
+    /*transform: translate(150px, -120px);*/
+    /*transform: skew(50deg, 50deg);*/
+    /* -------- */
+    border-radius: 12px;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
+/*@keyframes animacarta {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-10px, -370px);
+        width: 20px;
+        height: 60px;
+    }
+}*/
+
+.fondo_color_verde {
+    background: radial-gradient(ellipse at center, rgba(115, 163, 67, 1) 15%, rgba(115, 163, 67, 1) 20%, rgba(57, 105, 27, 1) 62%, rgba(57, 105, 27, 1) 88%);
+}
+
+@media screen and (max-width: 650px) {
+    #contenedorJuego {
+        display: grid;
+        grid-template-rows: 1fr 1fr 2fr 1fr 1fr 2fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "j1 j2" "j3 j4" "mesa mesa" "j5 j6" "j7 j8" "apostar apostar";
+    }
+    .mesa {
+        margin: 1%;
+        /* -------- */
+        border-radius: 0px;
+        /* -------- */
+        border: 0px solid rgb(138, 149, 151);
+        /* -------- */
+        background: transparent;
+    }
+    .mesaInterior {
+        width: 100%;
+        height: 100%;
+        /* -------- */
+        border: 1px solid black;
+        border-radius: 10px;
+        /* -------- */
+        grid-template-rows: 1fr 4fr 1fr;
+    }
+    .apostar {
+        grid-area: apostar;
+        /* -------- */
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 5fr 1fr 2fr 2fr;
+        grid-template-areas: "botones . carta1 carta2";
+    }
+    .puesto {
+        border: 1px solid black;
+        box-sizing: border-box;
+    }
+    .displayJugadores {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 3fr 1fr 1fr;
+        grid-template-areas: "jugador carta1 carta2";
+    }
+}
