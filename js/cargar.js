@@ -4,9 +4,15 @@ window.onload = iniciar;
 
 var cartas = [];
 
+var arrGlo = {
+    "miBd": {},
+    "conn": "",
+    "cartas": []
+}
+
 for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 13; j++) {
-        cartas.push(i + "" + j);
+        arrGlo.cartas.push(i + "" + j);
     }
 }
 
@@ -72,15 +78,6 @@ function crearDivs() {
         hijo.setAttribute("id", "mazo" + i);
         div2.appendChild(hijo);
     }
-    /*var hijo = document.createElement("div");
-    hijo.setAttribute("class", "mazo");
-    div2.appendChild(hijo);*/
-    /*for (let i = 1; i < 6; i++) {
-        var hijo = document.createElement("div");
-        hijo.setAttribute("class", "cartasMesa");
-        hijo.setAttribute("id", "cartaMesa" + i);
-        div2.appendChild(hijo);
-    }*/
     /* ------------------------- */
     div = document.createElement("div");
     div.setAttribute("class", "apostar" + " " + "fondo_color_verde");
@@ -131,7 +128,6 @@ function crearDivs() {
 function repartir_cartas() {
     var x = document.getElementById("carta1j1").clientWidth;
     var y = document.getElementById("carta1j1").clientHeight;
-    console.log(x + "  " + y);
 }
 
 function saberValor() {
@@ -142,5 +138,17 @@ function saberValor() {
 
     barra.oninput = function() {
         valor.innerHTML = this.value;
+    }
+}
+
+function crearBD() {
+    arrGlo.mibd.indexedDB = window.indexedDB;
+    arrGlo.mibd.IDBKeyRange = window.IDBKeyRange;
+    arrGlo.mibd.IDBKeyTransaction = window.IDBKeyTransaction;
+
+    arrGlo.conn = arrGlo.mibd.indexedDB.open("Poker");
+
+    arrGlo.conn.onupgradeneeded = function() {
+        this.result.createObjectStore("misCartas", { keyPath: "idPartida", autoIncrement: true });
     }
 }
