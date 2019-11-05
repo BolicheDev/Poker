@@ -1,0 +1,122 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    display: grid;
+    width: 100vw;
+    min-height: 100vh;
+    grid-template-rows: 1fr 1fr 8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "titulo"
+                        "menu"
+                        "contenido";
+}
+
+.titulo{
+    display:grid;
+    grid-area: titulo;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu{
+    display: grid;
+    grid-area: menu;
+    background-color: gray;
+    align-items: center;
+    justify-content: space-around;
+    grid-auto-flow: column;
+}
+
+.contenido{
+    display: grid;
+    grid-area: contenido;
+    grid-template-rows: 2fr 1fr 5fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "miformulario"
+                        "miboton"
+                        ".";
+}
+
+.miformulario{
+    display: grid;
+    grid-area: miformulario;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "datosP notas";
+}
+
+.miboton{
+    display: grid;
+    grid-area: miboton;
+    justify-content: center;
+    align-items: center;
+}
+
+.datosP{
+    display: grid;
+    grid-area: datosP;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "label input";
+}
+
+.label{
+    display: grid;
+    grid-area: label;
+    height: 8em;
+}
+.input{
+   display: grid;
+    grid-area: input; 
+    height: 8em;
+}
+.labelNotas{
+    display: grid;
+    grid-area: labelNotas;
+    height: 8em;
+}
+.inputNotas{
+    display: grid;
+    grid-area: inputNotas;
+    height: 8em;
+}
+
+.notas{
+    display: grid;
+    grid-area: notas;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "labelNotas inputNotas";
+}
+
+.contenidoAs{
+    display: grid;
+    grid-area: contenido;
+    grid-template-rows: 1fr 1fr ;
+    grid-template-columns: 1fr;
+    grid-template-areas: "fila1"
+                        "fila2";
+}
+
+.fila1{
+    display: grid;
+    grid-area: fila1;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "diw1 dawec1 daw1";
+}
+
+.fila2{
+    display: grid;
+    grid-area: fila2;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "dawes1 EIE1";
+}

@@ -1,0 +1,41 @@
+<!-- Con la base de datos xxx y el formulario con los campos:
+Codigo de producto
+cantidad 
+y el botón añadir producto, realizar realizar el siguiente proceso:
+Cuando se hayan rellenado los campos, al pulsar el botón añadir producto (OJO no debe ser un botón submit) aparezca mediante una petición AJAX al servidor una nueva línea de factura en un div detalle con las siguientes columnas:
+Codigo
+cantidad 
+Descripcion
+Precio Unitario
+Precio Total
+ Tenemos que tener en cuenta que:
+Cada vez que se añada el código de un producto y la cantidad, si existe ese producto en la base de datos (mediante AJAX), se incluirá la línea en la factura y se actualizará el precio total del producto comprado.-->
+
+<!DOCTYPE htm>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css" type="text/css" media="all">
+    <script type="text/javascript" src="js/ajax.js"></script>
+</head>
+
+<body id="cuerpo">
+    <div id="MisProductos">
+
+        <input type="button" id="mostrarPaises" value="mostrar" />
+        <br>
+        <br>
+    </div>
+
+    <div id="DetalleCompra">
+        Codigo Cantidad Descripcion Precio Unitario Precio Total <br>
+
+    </div>
+</body>
+
+</html>
