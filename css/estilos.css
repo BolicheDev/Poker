@@ -165,39 +165,30 @@ html {
     box-sizing: border-box;
 }
 
-.carta1 {
+.carta {
     margin: 1%;
     margin-right: 10%;
     /* -------- */
     border-radius: 6px;
     /* -------- */
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.puesto-carta-jugador1 {
     grid-area: carta1;
-    border: 1px solid black;
-    box-sizing: border-box;
-    /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
-    background-position: center center;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
 }
 
-.carta2 {
-    margin: 1%;
-    margin-right: 10%;
-    /* -------- */
-    border-radius: 6px;
-    /* -------- */
+.puesto-carta-jugador2 {
     grid-area: carta2;
-    border: 1px solid black;
-    box-sizing: border-box;
-    /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
-    background-position: center center;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
 }
 
-.check1 {
+.check {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -205,19 +196,13 @@ html {
     /* -------- */
     margin: 1%;
     margin-right: 10%;
-    /* -------- */
+}
+
+.hueco-check1 {
     grid-area: hueco1;
 }
 
-.check2 {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    /* -------- */
-    margin: 1%;
-    margin-right: 10%;
-    /* -------- */
+.hueco-check2 {
     grid-area: hueco2;
 }
 
@@ -280,10 +265,8 @@ html {
     align-items: center;
 }
 
-.cartaPropia1 {
+.cartaPropia {
     margin: 3%;
-    /* -------- */
-    grid-area: carta1;
     /* -------- */
     border: 1px solid black;
     box-sizing: border-box;
@@ -296,20 +279,12 @@ html {
     background-repeat: no-repeat;
 }
 
-.cartaPropia2 {
-    margin: 3%;
-    /* -------- */
+.carta-area-1 {
+    grid-area: carta1;
+}
+
+.carta-area-2 {
     grid-area: carta2;
-    /* -------- */
-    border: 1px solid black;
-    box-sizing: border-box;
-    /* -------- */
-    border-radius: 12px;
-    /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
-    background-position: center center;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
 }
 
 .mazo {
@@ -324,18 +299,12 @@ html {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     /* -------- */
-    /*animation-name: animacarta;
-    animation-duration: 2s;*/
-    /* -------- */
     grid-area: mazo;
 }
 
 .cartasMesa {
     width: 12%;
     height: 40%;
-    /*transform: translate(50px, 50px);*/
-    /*transform: translate(150px, -120px);*/
-    /*transform: skew(50deg, 50deg);*/
     /* -------- */
     border-radius: 12px;
     /* -------- */
@@ -344,17 +313,14 @@ html {
     background-repeat: no-repeat;
 }
 
-
-/*@keyframes animacarta {
+@keyframes animacarta50 {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0px, 0px);
     }
     100% {
-        transform: translate(-10px, -370px);
-        width: 20px;
-        height: 60px;
+        transform: translate(200px, 200px);
     }
-}*/
+}
 
 .fondo_color_verde {
     background: radial-gradient(ellipse at center, rgba(115, 163, 67, 1) 15%, rgba(115, 163, 67, 1) 20%, rgba(57, 105, 27, 1) 62%, rgba(57, 105, 27, 1) 88%);

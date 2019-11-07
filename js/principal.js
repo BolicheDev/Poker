@@ -59,19 +59,13 @@ function saberValor() {
 function repartir_visual() {
     var num_carta_repartir = 50;
     for (let i = 1; i < 3; i++) {
-        for (let j = 1; j < 9; j++) {
-            let carta = document.getElementById("mazo" + num_carta_repartir);
-            let lugar_carta = document.getElementById("carta" + i + "j" + j);
-
-            carta.style.position = "absolute";
-
-            carta.style.width = lugar_carta.clientWidth + "px";
-            carta.style.height = lugar_carta.clientHeight + "px";
-
-            carta.style.top = lugar_carta.offsetTop + "px";
-            carta.style.left = lugar_carta.offsetLeft + "px";
-            num_carta_repartir--;
-        }
+        var carta = document.getElementById("mazo" + num_carta_repartir);
+        /*var css = document.styleSheets;
+        var añadir = document.createTextNode('0% { transform: translate(0px, 0px); }' +
+            '100% { transform: translate(0px, 0px); }');
+        var keyframeobj = createKeyframe(añadir);
+        insertCSS(keyframeobj.css, { id: "animarcarta" + num_carta_repartir })*/
+        carta.setAttribute("animation:", "animarcarta" + num_carta_repartir + "2s");
     }
 }
 
@@ -116,19 +110,19 @@ function crearDivs() {
         /* ------------------------- */
         for (let j = 1; j < 3; j++) {
             hijo = document.createElement("div");
-            hijo.setAttribute("class", "carta" + j);
+            hijo.setAttribute("class", "carta puesto-carta-jugador" + j);
             hijo.setAttribute("id", "carta" + j + "j" + i);
             div.appendChild(hijo);
         }
         /* ------------------------- */
         hijo = document.createElement("div");
-        hijo.setAttribute("class", "check1");
+        hijo.setAttribute("class", "check hueco-check1");
         div.appendChild(hijo);
         hijo.innerHTML = "<i class='far fa-star fa-lg'></i>";
         /*hijo.innerHTML = "<i class='fas fa-star fa-lg'></i>";*/
         /* ------------------------- */
         hijo = document.createElement("div");
-        hijo.setAttribute("class", "check2");
+        hijo.setAttribute("class", "check hueco-check2");
         div.appendChild(hijo);
         hijo.innerHTML = "<i class='fas fa-star fa-lg'></i>";
         /*hijo.innerHTML = "<i class='fas fa-star fa-lg'></i>";*/
@@ -154,7 +148,7 @@ function crearDivs() {
     /* ------------------------- */
     for (var i = 1; i <= 2; i++) {
         var hijo = document.createElement("div");
-        hijo.setAttribute("class", "cartaPropia" + i);
+        hijo.setAttribute("class", "cartaPropia carta-area-" + i);
         hijo.setAttribute("id", "cartaPropia" + i);
         div.appendChild(hijo);
     }
