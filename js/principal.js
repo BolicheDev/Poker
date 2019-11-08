@@ -60,9 +60,6 @@ function repartir_visual() {
     var num_carta_repartir = 50;
     var padre_encima = document.getElementById("encima-repartir");
 
-    /*var texto = "translate(" + document.getElementById("carta1j1").offsetLeft + "px, -" + document.getElementById("carta1j1").offsetTop + " 0px)";
-    document.getElementById("mazo" + num_carta_repartir).classList.add("mover-carta");
-    document.getElementById("mazo" + num_carta_repartir).style.transform = texto;*/
     var mazo = document.getElementById("mazo");
 
     for (let i = 1; i < 51; i++) {
@@ -81,7 +78,7 @@ function repartir_visual() {
     var carta = 1;
     var numero = 50;
     var veces = 1;
-
+    var diferenciax, diferenciay, ancho, alto;
 
     var intervalo = setInterval(function() {
 
@@ -89,29 +86,44 @@ function repartir_visual() {
         var carta_mover = document.getElementById("mazo" + numero);
 
         if (carta_mover.style.top == document.getElementById("mazo1").style.top) {
-            var diferencia = (Number(carta_a_donde_mover.offsetTop) - Number(carta_mover.offsetTop)) / 10;
+            diferenciax = (Number(carta_mover.offsetTop) - Number(carta_a_donde_mover.offsetTop)) / 10;
+            diferenciay = (Number(carta_mover.offsetLeft) - Number(carta_a_donde_mover.offsetLeft)) / 10;
+            alto = (Number(carta_mover.offsetHeight) - Number(carta_a_donde_mover.offsetHeight)) / 10;
+            ancho = (Number(carta_mover.offsetWidth) - Number(carta_a_donde_mover.offsetWidth)) / 10;
         }
 
-        var pixel = Number(carta_mover.style.top.slice('.')[0]);
+        var pixelx = Number(carta_mover.style.top.split('px')[0]);
+        carta_mover.style.top = Number(pixelx - diferenciax) + "px";
 
-        carta_mover.style.top = pixel + diferencia + "px";
+        var pixely = Number(carta_mover.style.left.split('px')[0]);
+        carta_mover.style.left = Number(pixely - diferenciay) + "px";
 
-        if (carta == 2 && jugador == 8) {
+        var pixeli = Number(carta_mover.style.height.split('px')[0]);
+        carta_mover.style.height = Number(pixeli - alto) + "px";
+
+        var pixelj = Number(carta_mover.style.width.split('px')[0]);
+        carta_mover.style.width = Number(pixelj - ancho) + "px";
+
+        if (carta == 2 && jugador == 8 && veces == 10) {
             clearInterval(intervalo);
+            padre_encima.style.display = "none";
         }
-        if (jugador == 8) {
+
+        if (jugador == 8 && veces == 10) {
             jugador = 1;
             carta++;
+            if (veces == 10) {
+                veces = 0;
+                numero--;
+            }
         }
         if (veces == 10) {
-            veces = 1;
+            veces = 0;
             jugador++;
             numero--;
         }
-
         veces++;
-
-    }, 500);
+    }, 50);
 }
 
 function crearUsuario() {
