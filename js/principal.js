@@ -55,9 +55,9 @@ function repartir_visual() {
 
     var mazo = document.getElementById("mazo");
 
-    for (let i = 1; i < 22; i++) {
+    for (let i = 1; i < 23; i++) {
         var hijo = document.createElement("div");
-        hijo.setAttribute("class", "mazo");
+        hijo.setAttribute("class", "mazo mazo-reverso");
         hijo.setAttribute("id", "mazo" + i);
         hijo.style.top = mazo.offsetTop + "px";
         hijo.style.left = mazo.offsetLeft + "px";
@@ -69,7 +69,7 @@ function repartir_visual() {
 
     var jugador = 1;
     var carta = 1;
-    var numero = 21;
+    var numero = 22;
     var veces = 1;
     var posicion = 0;
     var diferenciax, diferenciay, ancho, alto;
@@ -100,8 +100,9 @@ function repartir_visual() {
 
         if (carta == 2 && jugador == 8 && veces == 10) {
             clearInterval(intervalo);
-            padre_encima.style.display = "none";
-            padre_encima.remove();
+            //padre_encima.style.display = "none";
+            //padre_encima.remove();
+            repartir_mesa();
         }
 
         if (jugador == 8 && veces == 10) {
@@ -123,6 +124,42 @@ function repartir_visual() {
             document.getElementById("carta" + carta + "j" + jugador).style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
             veces = 0;
             jugador++;
+            numero--;
+            posicion++;
+        }
+        veces++;
+    }, 30);
+}
+
+function repartir_mesa() {
+    var carta = 1;
+    var numero = 6;
+    var veces = 1;
+    var posicion = 16;
+    var diferenciax, diferenciay, ancho, alto;
+
+    var intervalo = setInterval(function() {
+
+        if (carta == 6) {
+            clearInterval(intervalo);
+            document.getElementById("encima-repartir").style.display = "none";
+            document.getElementById("encima-repartir").remove();
+        }
+
+        var carta_a_donde_mover = document.getElementById("carta" + carta);
+        var carta_mover = document.getElementById("mazo" + numero);
+
+        if (carta_mover.style.left == document.getElementById("mazo1").style.left) {
+            diferenciay = (Number(carta_mover.offsetLeft) - Number(carta_a_donde_mover.offsetLeft)) / 10;
+        }
+
+        var pixely = Number(carta_mover.style.left.split('px')[0]);
+        carta_mover.style.left = Number(pixely - diferenciay) + "px";
+
+        if (veces == 10) {
+            document.getElementById("carta" + carta).style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
+            carta++;
+            veces = 0;
             numero--;
             posicion++;
         }
@@ -209,10 +246,16 @@ function crearDivs() {
     /* ------------------------- */
     //for (let i = 1; i < 51; i++) {
     var hijo = document.createElement("div");
-    hijo.setAttribute("class", "mazo");
+    hijo.setAttribute("class", "mazo mazo-reverso");
     hijo.setAttribute("id", "mazo");
     div2.appendChild(hijo);
-    //}
+    for (let i = 1; i < 6; i++) {
+        var hijo = document.createElement("div");
+        hijo.setAttribute("class", "mazo");
+        hijo.setAttribute("id", "carta" + i);
+        hijo.style.gridArea = "carta" + i;
+        div2.appendChild(hijo);
+    }
     /* ------------------------- */
     div = document.createElement("div");
     div.setAttribute("class", "apostar" + " " + "fondo_color_verde");

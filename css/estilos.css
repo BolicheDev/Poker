@@ -160,8 +160,8 @@ html {
     /* -------- */
     display: grid;
     grid-template-rows: 1fr 2fr 1fr;
-    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr 1fr;
-    grid-template-areas: ". . . . . . . ." ". mazo carta1 carta2 carta3 carta4 carta5 ." ". . . . . . . .";
+    grid-template-columns: 1fr 2fr 1fr 2fr 2fr 2fr 2fr 2fr 1fr;
+    grid-template-areas: ". . . . . . . . ." ". mazo . carta1 carta2 carta3 carta4 carta5 ." ". . . . . . . . .";
 }
 
 .apostar {
@@ -311,16 +311,16 @@ html {
 }
 
 .mazo {
-    /*width: 100%;
-    height: 100%;*/
-    /* -------- */
     border-radius: 12px;
     /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    /* -------- */
+}
+
+.mazo-reverso {
     grid-area: mazo;
+    /* -------- */
+    background-image: url(../img/reversoNegro.jpg);
 }
 
 .cartasMesa {
