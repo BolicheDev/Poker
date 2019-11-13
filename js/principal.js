@@ -213,13 +213,13 @@ function crearDivs() {
             div.appendChild(hijo);
         }
         /* ------------------------- */
-        hijo = document.createElement("div");
+        /*hijo = document.createElement("div");
         hijo.setAttribute("class", "check hueco-check1");
         div.appendChild(hijo);
         hijo.innerHTML = "<i class='far fa-star fa-lg'></i>";
         /*hijo.innerHTML = "<i class='fas fa-star fa-lg'></i>";*/
         /* ------------------------- */
-        hijo = document.createElement("div");
+        /*hijo = document.createElement("div");
         hijo.setAttribute("class", "check hueco-check2");
         div.appendChild(hijo);
         hijo.innerHTML = "<i class='fas fa-star fa-lg'></i>";

@@ -87,7 +87,6 @@ html {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: "j1 j2 j3 j4" "j5 j6 j7 j8" "mesa mesa mesa apostar";
     /* -------- */
-    /*background-color: aquamarine;*/
     background: radial-gradient(ellipse at center, rgba(130, 201, 60, 1) 15%, rgba(130, 201, 60, 1) 20%, rgba(92, 173, 45, 1) 67%, rgba(92, 173, 45, 1) 88%);
 }
 
@@ -116,9 +115,9 @@ html {
 
 .displayJugadores {
     display: grid;
-    grid-template-rows: 1fr 4fr 1fr;
-    grid-template-columns: 3fr 1fr 1fr;
-    grid-template-areas: "jugador hueco1 hueco2" "jugador carta1 carta2" "jugador hueco hueco";
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas: "jugador carta1 carta2" "jugador carta1 carta2" "jugador carta1 carta2";
 }
 
 .jugador {
@@ -380,5 +379,9 @@ html {
         grid-template-rows: 1fr;
         grid-template-columns: 3fr 1fr 1fr;
         grid-template-areas: "jugador carta1 carta2";
+    }
+    .login {
+        width: 90%;
+        height: 90%;
     }
 }
