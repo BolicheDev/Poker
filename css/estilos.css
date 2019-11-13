@@ -13,7 +13,17 @@ html {
     font-size: 20px;
 }
 
+.container {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
 .contenedor {
+    position: absolute;
+    z-index: 3;
+    /* ------------ */
     width: 100%;
     height: 100%;
     /* ------------ */
@@ -22,6 +32,8 @@ html {
     justify-content: center;
     text-align: center;
     align-items: center;
+    /* ------------ */
+    backdrop-filter: blur(10px);
 }
 
 .login {
@@ -185,7 +197,7 @@ html {
     border: 1px solid black;
     box-sizing: border-box;
     /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
+    /*background-image: url(../img/reversoNegro.jpg);*/
     background-position: center center;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -284,7 +296,7 @@ html {
     /* -------- */
     border-radius: 12px;
     /* -------- */
-    background-image: url(../img/reversoNegro.jpg);
+    /*background-image: url(../img/reversoNegro.jpg);*/
     background-position: center center;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -320,18 +332,6 @@ html {
     background-image: url(../img/reversoNegro.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-}
-
-.mover-carta {
-    /*transform: translate(150px, 0px);*/
-    animation: animacarta 2s;
-    /*animation-direction: reverse;*/
-}
-
-@keyframes animacarta {
-    100% {
-        transform: translate(192px, 192px);
-    }
 }
 
 .fondo_color_verde {

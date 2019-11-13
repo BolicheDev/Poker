@@ -2,58 +2,51 @@
 
 window.onload = iniciar;
 
-var cartas = [];
-
 var arrGlo = {
     "miBd": {},
     "conn": "",
     "cartas": []
-}
+};
 
 var tablas = {
     "usuarios": "Usuarios",
     "partidas": "Partidas",
     "cartas": "Cartas",
     "jugadas": "Jugadas"
-}
-
-for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 13; j++) {
-        arrGlo.cartas.push(i + "" + j);
-    }
-}
-
-cartas.sort(function() { return Math.random() - 0.5 });
+};
 
 function iniciar() {
     crearDivs();
-    //document.getElementById("contenedorJuego").style.display = "none";
-    cambiar();
-    document.getElementById("botonLogin").addEventListener("click", cambiar);
-    document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
-    document.getElementById("subir").addEventListener("click", repartir_visual);
-    repartir_visual();
+    añadir_funcion_botones();
+    mezclar_generar_cartas();
+}
+
+function mezclar_generar_cartas() {
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 13; j++) {
+            var carta = new Clase_carta(j, i + "" + j);
+            arrGlo.cartas.push(carta);
+        }
+    }
+
+    arrGlo.cartas.sort(function() { return Math.random() - 0.5 });
+}
+
+function Clase_carta(valor, imagen) {
+    this.valor = valor;
+    this.imagen = imagen;
 }
 
 function cambiar() {
-    document.getElementById("contenedor").style.display = "none";
+    document.getElementById("contenedor").remove();
     document.getElementById("contenedorJuego").style.display = "grid";
+    repartir_visual();
 }
 
-function repartir_cartas() {
-    var x = document.getElementById("carta1j1").clientWidth;
-    var y = document.getElementById("carta1j1").clientHeight;
-}
-
-function saberValor() {
-    var barra = document.getElementById("barra");
-    var valor = document.getElementById("valorBarra");
-
-    valor.innerHTML = barra.value;
-
-    barra.oninput = function() {
-        valor.innerHTML = this.value;
-    }
+function añadir_funcion_botones() {
+    document.getElementById("botonLogin").addEventListener("click", cambiar);
+    document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
+    document.getElementById("subir").addEventListener("click", repartir_visual);
 }
 
 function repartir_visual() {
@@ -62,7 +55,7 @@ function repartir_visual() {
 
     var mazo = document.getElementById("mazo");
 
-    for (let i = 1; i < 51; i++) {
+    for (let i = 1; i < 22; i++) {
         var hijo = document.createElement("div");
         hijo.setAttribute("class", "mazo");
         hijo.setAttribute("id", "mazo" + i);
@@ -76,8 +69,9 @@ function repartir_visual() {
 
     var jugador = 1;
     var carta = 1;
-    var numero = 50;
+    var numero = 21;
     var veces = 1;
+    var posicion = 0;
     var diferenciax, diferenciay, ancho, alto;
 
     var intervalo = setInterval(function() {
@@ -107,9 +101,11 @@ function repartir_visual() {
         if (carta == 2 && jugador == 8 && veces == 10) {
             clearInterval(intervalo);
             padre_encima.style.display = "none";
+            padre_encima.remove();
         }
 
         if (jugador == 8 && veces == 10) {
+            document.getElementById("carta" + carta + "j" + jugador).style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
             jugador = 1;
             carta++;
             if (veces == 10) {
@@ -118,9 +114,17 @@ function repartir_visual() {
             }
         }
         if (veces == 10) {
+            if (carta == 1 && jugador == 1) {
+                document.getElementById("cartaPropia1").style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
+            }
+            if (carta == 2 && jugador == 1) {
+                document.getElementById("cartaPropia2").style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
+            }
+            document.getElementById("carta" + carta + "j" + jugador).style.backgroundImage = "url(img/" + arrGlo.cartas[posicion].imagen + ".jpg)";
             veces = 0;
             jugador++;
             numero--;
+            posicion++;
         }
         veces++;
     }, 50);
@@ -150,6 +154,17 @@ function crearUsuario() {
     fallo.innerHTML = texto;
     document.getElementById("passwordRegistro1").innerHTML = "";
     document.getElementById("passwordRegistro2").innerHTML = "";
+}
+
+function saberValor() {
+    var barra = document.getElementById("barra");
+    var valor = document.getElementById("valorBarra");
+
+    valor.innerHTML = barra.value;
+
+    barra.oninput = function() {
+        valor.innerHTML = this.value;
+    }
 }
 
 function crearDivs() {
