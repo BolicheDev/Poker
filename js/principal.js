@@ -8,14 +8,8 @@ var arrGlo = {
     "cartas": []
 };
 
-var tablas = {
-    "usuarios": "Usuarios",
-    "partidas": "Partidas",
-    "cartas": "Cartas",
-    "jugadas": "Jugadas"
-};
-
 function iniciar() {
+    crearBD();
     crearDivs();
     añadir_funcion_botones();
     mezclar_generar_cartas();
@@ -28,8 +22,8 @@ function mezclar_generar_cartas() {
             arrGlo.cartas.push(carta);
         }
     }
-
     arrGlo.cartas.sort(function() { return Math.random() - 0.5 });
+    añadir(arrGlo.cartas, "Mezcla");
 }
 
 function Clase_carta(valor, imagen) {
@@ -45,17 +39,16 @@ function cambiar() {
 
 function añadir_funcion_botones() {
     document.getElementById("botonLogin").addEventListener("click", cambiar);
-    document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
+    //document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
     document.getElementById("subir").addEventListener("click", repartir_visual);
 }
 
 function repartir_visual() {
-    var num_carta_repartir = 50;
     var padre_encima = document.getElementById("encima-repartir");
 
     var mazo = document.getElementById("mazo");
 
-    for (let i = 1; i < 23; i++) {
+    for (let i = 1; i < 24; i++) {
         var hijo = document.createElement("div");
         hijo.setAttribute("class", "mazo mazo-reverso");
         hijo.setAttribute("id", "mazo" + i);
@@ -69,7 +62,7 @@ function repartir_visual() {
 
     var jugador = 1;
     var carta = 1;
-    var numero = 22;
+    var numero = 23;
     var veces = 1;
     var posicion = 0;
     var diferenciax, diferenciay, ancho, alto;
@@ -100,8 +93,6 @@ function repartir_visual() {
 
         if (carta == 2 && jugador == 8 && veces == 10) {
             clearInterval(intervalo);
-            //padre_encima.style.display = "none";
-            //padre_encima.remove();
             repartir_mesa();
         }
 
@@ -133,18 +124,12 @@ function repartir_visual() {
 
 function repartir_mesa() {
     var carta = 1;
-    var numero = 6;
+    var numero = 7;
     var veces = 1;
     var posicion = 16;
     var diferenciax, diferenciay, ancho, alto;
 
-    var intervalo = setInterval(function() {
-
-        if (carta == 6) {
-            clearInterval(intervalo);
-            document.getElementById("encima-repartir").style.display = "none";
-            document.getElementById("encima-repartir").remove();
-        }
+    var intervalo2 = setInterval(function() {
 
         var carta_a_donde_mover = document.getElementById("carta" + carta);
         var carta_mover = document.getElementById("mazo" + numero);
@@ -162,6 +147,10 @@ function repartir_mesa() {
             veces = 0;
             numero--;
             posicion++;
+            if (carta == 6) {
+                clearInterval(intervalo2);
+                document.getElementById("encima-repartir").remove();
+            }
         }
         veces++;
     }, 50);
@@ -178,7 +167,7 @@ function crearUsuario() {
     if (contraseña == contraseñaRep) {
         if (contraseña.length >= 4 && nombre.length >= 4) {
             var obj = { "Nombre": nombre, "contraseña": contraseña };
-            añadir(obj, tablas.usuarios);
+            //añadir(obj, tablas.usuarios);
             texto += "<h3> Usuario creado correctamente </h3>";
             document.getElementById("usuarioInput").innerHTML = "";
         } else {
