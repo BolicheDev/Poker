@@ -23,14 +23,23 @@ function añadir(obj, tabla) {
     };
 }
 
-function leersdatos(tabla) {
+function añadir_cartas(obj) {
+    arrGlo.conn = arrGlo.miBd.indexedDB.open("Poker");
+    arrGlo.conn.onsuccess = function() {
+        this.result.transaction("Mezcla", "readwrite").objectStore("Mezcla").add(obj).onsuccess = (function() {
+            cargar_cartas_mezcla("Mezcla");
+        })
+    };
+}
+
+function cargar_cartas_mezcla() {
     arrGlo.conn = arrGlo.miBd.indexedDB.open("Poker");
 
     arrGlo.conn.onsuccess = function() {
         var transaccion = this.result;
-        var variable = this.result.transaction(tabla, "readwrite").objectStore(tabla).count().onsuccess = function() {
-            transaccion.transaction(tabla, "readwrite").objectStore(tabla).get(this.result).onsuccess = function() {
-                console.log(this.result);
+        var variable = this.result.transaction("Mezcla", "readwrite").objectStore("Mezcla").count().onsuccess = function() {
+            transaccion.transaction("Mezcla", "readwrite").objectStore("Mezcla").get(this.result).onsuccess = function() {
+                arrGlo.comprobante = this.result;
             };
         };
     }

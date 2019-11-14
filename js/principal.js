@@ -5,7 +5,8 @@ window.onload = iniciar;
 var arrGlo = {
     "miBd": {},
     "conn": "",
-    "cartas": []
+    "cartas": [],
+    "comprobante": []
 };
 
 function iniciar() {
@@ -13,7 +14,6 @@ function iniciar() {
     crearDivs();
     añadir_funcion_botones();
     mezclar_generar_cartas();
-    leersdatos("Mezcla");
 }
 
 function mezclar_generar_cartas() {
@@ -24,7 +24,7 @@ function mezclar_generar_cartas() {
         }
     }
     arrGlo.cartas.sort(function() { return Math.random() - 0.5 });
-    añadir(arrGlo.cartas, "Mezcla");
+    añadir_cartas(arrGlo.cartas.slice(0, 21), "Mezcla");
 }
 
 function Clase_carta(valor, imagen) {
@@ -41,7 +41,7 @@ function cambiar() {
 function añadir_funcion_botones() {
     document.getElementById("botonLogin").addEventListener("click", cambiar);
     //document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
-    document.getElementById("subir").addEventListener("click", repartir_visual);
+    document.getElementById("subir").addEventListener("click", saber_ganador);
 }
 
 function repartir_visual() {
@@ -49,7 +49,7 @@ function repartir_visual() {
 
     var mazo = document.getElementById("mazo");
 
-    for (let i = 1; i < 24; i++) {
+    for (let i = 1; i < 22; i++) {
         var hijo = document.createElement("div");
         hijo.setAttribute("class", "mazo mazo-reverso");
         hijo.setAttribute("id", "mazo" + i);
@@ -63,7 +63,7 @@ function repartir_visual() {
 
     var jugador = 1;
     var carta = 1;
-    var numero = 23;
+    var numero = 21;
     var veces = 1;
     var posicion = 0;
     var diferenciax, diferenciay, ancho, alto;
@@ -104,6 +104,7 @@ function repartir_visual() {
             if (veces == 10) {
                 veces = 0;
                 numero--;
+                posicion++;
             }
         }
         if (veces == 10) {
@@ -125,7 +126,7 @@ function repartir_visual() {
 
 function repartir_mesa() {
     var carta = 1;
-    var numero = 7;
+    var numero = 5;
     var veces = 1;
     var posicion = 16;
     var diferenciax, diferenciay, ancho, alto;
@@ -277,7 +278,7 @@ function crearDivs() {
     hijo2.setAttribute("class", "subir");
     hijo2.setAttribute("id", "subir");
     hijo.appendChild(hijo2);
-    hijo2.innerHTML = "Subir";
+    hijo2.innerHTML = "Comprobar jugada";
     /* ------------------------- */
     hijo2 = document.createElement("button");
     hijo2.setAttribute("class", "pasar");
