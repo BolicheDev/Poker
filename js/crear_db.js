@@ -22,3 +22,16 @@ function añadir(obj, tabla) {
         this.result.transaction(tabla, "readwrite").objectStore(tabla).add(obj);
     };
 }
+
+function leersdatos(tabla) {
+    arrGlo.conn = arrGlo.miBd.indexedDB.open("Poker");
+
+    arrGlo.conn.onsuccess = function() {
+        var transaccion = this.result;
+        var variable = this.result.transaction(tabla, "readwrite").objectStore(tabla).count().onsuccess = function() {
+            transaccion.transaction(tabla, "readwrite").objectStore(tabla).get(this.result).onsuccess = function() {
+                console.log(this.result);
+            };
+        };
+    }
+}

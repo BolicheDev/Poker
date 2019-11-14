@@ -375,6 +375,10 @@ html {
         border: 1px solid black;
         box-sizing: border-box;
     }
+    .login {
+        width: 90%;
+        height: 90%;
+    }
     .displayJugadores {
         display: grid;
         grid-template-rows: 1fr;

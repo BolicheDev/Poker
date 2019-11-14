@@ -13,6 +13,7 @@ function iniciar() {
     crearDivs();
     añadir_funcion_botones();
     mezclar_generar_cartas();
+    leersdatos("Mezcla");
 }
 
 function mezclar_generar_cartas() {

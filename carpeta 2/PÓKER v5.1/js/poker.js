@@ -44,7 +44,6 @@ function cargar() {
     variablesGlobales.conn.onsuccess = function() {
         this.result.transaction("misCartas", "readwrite").objectStore("misCartas").get(1).onsuccess = function() {
             document.getElementById("principal").innerHTML = this.result.mipartida;
-
         };
     };
 }
