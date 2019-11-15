@@ -3,16 +3,16 @@
 var arr_jugadores = [];
 
 function activar_jugada() {
-    var arr = arrGlo.comprobante;
+    /* Clonamos el array */
+    var arr = arrGlo.comprobante.slice();
+    /* Creamos matriz y variables */
     var matriz = [
         []
     ];
-    /*var matriz_aux = [
-        []
-    ];*/
     var rep_x = [],
         rep_y = [],
         cont = [];
+    /* Añadimos valores a los jugadores y a la mesa */
     var cartas_jugador = [
         [arr[0], arr[8]],
         [arr[1], arr[9]],
@@ -25,24 +25,29 @@ function activar_jugada() {
     ];
     var mesa = [arr[16], arr[17], arr[18], arr[19], arr[20]];
 
+    /* Recorremos los 8 jugadores */
     for (let i = 0; i < 8; i++) {
         /* Limpiamos la matriz */
         for (let j = 0; j < 4; j++) {
             matriz[j] = [];
-            //matriz_aux[j] = [];
             for (let h = 0; h < 13; h++) {
                 matriz[j][h] = 0;
-                //matriz_aux[j][h] = 0;
             }
         }
+        /* Guardamos la carta alta, recodamos que el AS es el que mas vale (en mi caso tiene valor 1) */
+        /* Inicializamos la carta alta a 0 para no tener problemas de valores */
+        let carta_alta = 0;
         /* Meter elementos en la matriz */
         cartas_jugador[i].forEach(element => {
             matriz[element.palo][element.numero] = 1;
-            //matriz_aux[element.palo][element.numero] = Number(element.palo + 1);
+            /* Sobre escribimos el valor de la carta alta */
+            if (element.valor > carta_alta && carta_alta != 1) {
+                carta_alta = element.valor;
+            }
         });
+        /* Añadir a la matriz las cartas de la mesa */
         mesa.forEach(element => {
             matriz[element.palo][element.numero] = 1;
-            //matriz_aux[element.palo][element.numero] = Number(element.valor + 1);
         });
         /* Meter cartas para saber, pareja, trio, doble pareja, poker, o full */
         for (let j = 0; j < 13; j++) {
@@ -52,8 +57,9 @@ function activar_jugada() {
                 rep_y[j] = 0;
             }
         }
-        /* Para saber si es escalera normal */
+        /* Para saber si es escalera normal y escalera de color */
         let esc_real = false;
+        let color = false;
         for (let j = 0; j < 4; j++) {
             rep_x[j] = 0;
             for (let h = 0; h < 13; h++) {
@@ -61,18 +67,36 @@ function activar_jugada() {
                     rep_x[j] += 1;
                 }
             }
+            /* Guardar para saber si mas tarde comprobar si es escalera de color */
+            /* Comprobar si es escalera real */
             if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) >= 4 && matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) <= 6 && rep_x[j] >= 5) {
                 cont[j] = true;
             } else if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) == 12 && rep_x[j] >= 5) {
                 cont[j] = true;
                 esc_real = true;
+            } else if (rep_x[j] >= 5) {
+                color = true;
             } else {
                 cont[j] = false;
             }
         }
+        /* Saber si es escalera simple */
+        let escalera = false;
+        let seguidos = 0;
+        for (let j = 0; j < 13; j++) {
+            if (rep_y[j] == 1) {
+                seguidos++;
+                if (seguidos == 5) {
+                    escalera = true;
+                }
+            } else {
+                seguidos = 0;
+            }
+        }
+        /* Contar parejas, trios, y full */
         let parejas = 0;
         let trios = 0;
-        let full = 0;
+        let poker = 0;
         for (let j = 0; j < 13; j++) {
             switch (rep_y[j]) {
                 case 2:
@@ -82,18 +106,28 @@ function activar_jugada() {
                     trios++;
                     break;
                 case 4:
-                    full++;
+                    poker++;
                     break;
             }
         }
-        arr_jugadores[i] = [parejas, trios, full, i];
+        /* Pasar limpio saber si es escalera color */
+        let esc_color = false;
+        cont.forEach(element => {
+            if (element) {
+                esc_color = true;
+            }
+        })
+        arr_jugadores[i] = [parejas, trios, poker, i, esc_real, carta_alta, color, escalera, esc_color];
     }
 }
 
 function saber_ganador() {
-    var ganador = [null, 0];
-    var puntos = 0;
+    var ganador = [null, -1, 0];
+    var empate = false;
     arr_jugadores.forEach(jugador => {
+        let puntos = 0;
+        /* Si es pareja, le damos valor de 2 */
+        /* Si es doble pareja, le damos valor de 3 */
         switch (jugador[0]) {
             case 1:
                 puntos = 2;
@@ -102,21 +136,56 @@ function saber_ganador() {
                 puntos = 3;
                 break;
         }
+        /* Si es trio, le damos valor de 4 */
         if (jugador[1] != 0) {
             puntos = 4
         }
-        if ((jugador[0] == 2 || jugador[0] == 3) && jugador[1] != 0) {
+        /* Si es escalera, le damos valor de 5 */
+        if (jugador[7] == true) {
+            puntos = 5;
+        }
+        /* Si es color, le damos valor de 6 */
+        if (jugador[6] == true) {
+            puntos = 6;
+        }
+        /* Si es un full, le damos valor de 7 */
+        if ((jugador[0] == 1 || jugador[0] == 2) && jugador[1] != 0) {
             puntos = 7;
         }
+        /* Si es poker, le damos valor de 8 */
         if (jugador[2] == 1) {
             puntos = 8;
         }
+        /* Si es escalera de color, le damos valor de 9 */
+        if (jugador[8] == true) {
+            puntos = 9;
+        }
+        /* Si es escalera real, le damos valor de 10 */
+        if (jugador[4] == true && jugador[8] == true) {
+            puntos = 10;
+        }
+        /* Comprobamos ganador y si hay empate miramos carta alta */
         if (ganador[1] < puntos) {
             ganador[0] = jugador;
             ganador[1] = puntos;
+            ganador[2] = jugador[5];
+            empate = false;
+        } else if (ganador[1] == puntos) {
+            if (ganador[2] < jugador[5] || (jugador[5] == 1 && ganador[2] != 1)) {
+                ganador[0] = jugador;
+                ganador[1] = puntos;
+                ganador[2] = jugador[5];
+                empate = false;
+            } else {
+                empate = true;
+            }
         }
     });
-    console.log("El ganador es el jugador " + Number(ganador[0][3] + 1));
+    if (empate == true) {
+        alert("Hay un empate");
+    } else {
+        alert("El ganador es el jugador " + Number(ganador[0][3] + 1));
+    }
 }
 
 /*function sleep(milliseconds) {
