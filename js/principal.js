@@ -19,7 +19,7 @@ function iniciar() {
 function mezclar_generar_cartas() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 13; j++) {
-            var carta = new Clase_carta(j, i + "" + j);
+            var carta = new Clase_carta(Number(j + 1), i + "" + j, i, j);
             arrGlo.cartas.push(carta);
         }
     }
@@ -27,9 +27,11 @@ function mezclar_generar_cartas() {
     añadir_cartas(arrGlo.cartas.slice(0, 21), "Mezcla");
 }
 
-function Clase_carta(valor, imagen) {
+function Clase_carta(valor, imagen, palo, numero) {
     this.valor = valor;
     this.imagen = imagen;
+    this.palo = palo;
+    this.numero = numero;
 }
 
 function cambiar() {
@@ -121,7 +123,7 @@ function repartir_visual() {
             posicion++;
         }
         veces++;
-    }, 30);
+    }, 10);
 }
 
 function repartir_mesa() {
@@ -155,7 +157,7 @@ function repartir_mesa() {
             }
         }
         veces++;
-    }, 50);
+    }, 10);
 }
 
 function crearUsuario() {
