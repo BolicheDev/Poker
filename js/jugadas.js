@@ -24,7 +24,7 @@ function saber_ganador() {
     ];
     var mesa = [arr[16], arr[17], arr[18], arr[19], arr[20]];
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 8; i++) {
         /* Limpiamos la matriz */
         for (let j = 0; j < 4; j++) {
             matriz[j] = [];
@@ -52,6 +52,7 @@ function saber_ganador() {
             }
         }
         /* Para saber si es escalera normal */
+        let esc_color = false;
         for (let j = 0; j < 4; j++) {
             rep_x[j] = 0;
             for (let h = 0; h < 13; h++) {
@@ -59,15 +60,17 @@ function saber_ganador() {
                     rep_x[j] += 1;
                 }
             }
-            if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) == 4) {
+            if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) >= 4 && matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) <= 6 && rep_x[j] >= 5) {
                 cont[j] = true;
-            } else if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) == 12) {
+            } else if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) == 12 && rep_x[j] >= 5) {
                 cont[j] = true;
+            } else if (cont[j] == true && matriz[j].lastIndexOf(1).palo == matriz[j].indexOf(1).palo) {
+                esc_color = true;
             } else {
                 cont[j] = false;
             }
         }
-
+        console.log(esc_color);
     }
 }
 
