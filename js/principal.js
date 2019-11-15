@@ -43,7 +43,16 @@ function cambiar() {
 function añadir_funcion_botones() {
     document.getElementById("botonLogin").addEventListener("click", cambiar);
     //document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
-    document.getElementById("subir").addEventListener("click", saber_ganador);
+    document.getElementById("subir").addEventListener("click", activar_jugada);
+    document.getElementById("pasar").addEventListener("click", saber_ganador);
+    for (let i = 1; i < 9; i++) {
+        document.getElementById("j" + i).addEventListener("click", saber_mano);
+    }
+}
+
+function saber_mano() {
+    var x = Number(this.id.slice(1) - 1);
+    console.log(arr_jugadores[x]);
 }
 
 function repartir_visual() {
@@ -280,13 +289,13 @@ function crearDivs() {
     hijo2.setAttribute("class", "subir");
     hijo2.setAttribute("id", "subir");
     hijo.appendChild(hijo2);
-    hijo2.innerHTML = "Comprobar jugada";
+    hijo2.innerHTML = "Activar jugada";
     /* ------------------------- */
     hijo2 = document.createElement("button");
     hijo2.setAttribute("class", "pasar");
     hijo2.setAttribute("id", "pasar");
     hijo.appendChild(hijo2);
-    hijo2.innerHTML = "Pasar";
+    hijo2.innerHTML = "Saber ganador";
     /* ------------------------- */
     hijo2 = document.createElement("button");
     hijo2.setAttribute("class", "retiro");

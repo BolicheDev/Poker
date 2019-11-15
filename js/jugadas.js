@@ -1,6 +1,8 @@
 'use strict'
 
-function saber_ganador() {
+var arr_jugadores = [];
+
+function activar_jugada() {
     var arr = arrGlo.comprobante;
     var matriz = [
         []
@@ -8,8 +10,7 @@ function saber_ganador() {
     /*var matriz_aux = [
         []
     ];*/
-    var jugadores = [],
-        rep_x = [],
+    var rep_x = [],
         rep_y = [],
         cont = [];
     var cartas_jugador = [
@@ -52,7 +53,7 @@ function saber_ganador() {
             }
         }
         /* Para saber si es escalera normal */
-        let esc_color = false;
+        let esc_real = false;
         for (let j = 0; j < 4; j++) {
             rep_x[j] = 0;
             for (let h = 0; h < 13; h++) {
@@ -64,14 +65,58 @@ function saber_ganador() {
                 cont[j] = true;
             } else if (matriz[j].lastIndexOf(1) - matriz[j].indexOf(1) == 12 && rep_x[j] >= 5) {
                 cont[j] = true;
-            } else if (cont[j] == true && matriz[j].lastIndexOf(1).palo == matriz[j].indexOf(1).palo) {
-                esc_color = true;
+                esc_real = true;
             } else {
                 cont[j] = false;
             }
         }
-        console.log(esc_color);
+        let parejas = 0;
+        let trios = 0;
+        let full = 0;
+        for (let j = 0; j < 13; j++) {
+            switch (rep_y[j]) {
+                case 2:
+                    parejas++;
+                    break;
+                case 3:
+                    trios++;
+                    break;
+                case 4:
+                    full++;
+                    break;
+            }
+        }
+        arr_jugadores[i] = [parejas, trios, full, i];
     }
+}
+
+function saber_ganador() {
+    var ganador = [null, 0];
+    var puntos = 0;
+    arr_jugadores.forEach(jugador => {
+        switch (jugador[0]) {
+            case 1:
+                puntos = 2;
+                break;
+            case 2:
+                puntos = 3;
+                break;
+        }
+        if (jugador[1] != 0) {
+            puntos = 4
+        }
+        if ((jugador[0] == 2 || jugador[0] == 3) && jugador[1] != 0) {
+            puntos = 7;
+        }
+        if (jugador[2] == 1) {
+            puntos = 8;
+        }
+        if (ganador[1] < puntos) {
+            ganador[0] = jugador;
+            ganador[1] = puntos;
+        }
+    });
+    console.log("El ganador es el jugador " + Number(ganador[0][3] + 1));
 }
 
 /*function sleep(milliseconds) {
