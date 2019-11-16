@@ -28,12 +28,7 @@ function activar_jugada() {
     /* Recorremos los 8 jugadores */
     for (let i = 0; i < 8; i++) {
         /* Limpiamos la matriz */
-        for (let j = 0; j < 4; j++) {
-            matriz[j] = [];
-            for (let h = 0; h < 13; h++) {
-                matriz[j][h] = 0;
-            }
-        }
+        limpiar_matriz(matriz);
         /* Guardamos la carta alta, recodamos que el AS es el que mas vale (en mi caso tiene valor 1) */
         /* Inicializamos la carta alta a 0 para no tener problemas de valores */
         let carta_alta = 0;
@@ -41,7 +36,9 @@ function activar_jugada() {
         cartas_jugador[i].forEach(element => {
             matriz[element.palo][element.numero] = 1;
             /* Sobre escribimos el valor de la carta alta */
-            if (element.valor > carta_alta && carta_alta != 1) {
+            if (element.valor == 1) {
+                carta_alta = 1;
+            } else if (element.valor > carta_alta && carta_alta != 1) {
                 carta_alta = element.valor;
             }
         });
@@ -81,18 +78,8 @@ function activar_jugada() {
             }
         }
         /* Saber si es escalera simple */
-        let escalera = false;
-        let seguidos = 0;
-        for (let j = 0; j < 13; j++) {
-            if (rep_y[j] == 1) {
-                seguidos++;
-                if (seguidos == 5) {
-                    escalera = true;
-                }
-            } else {
-                seguidos = 0;
-            }
-        }
+        let escalera = saber_escalera();
+
         /* Contar parejas, trios, y full */
         let parejas = 0;
         let trios = 0;
@@ -111,14 +98,45 @@ function activar_jugada() {
             }
         }
         /* Pasar limpio saber si es escalera color */
-        let esc_color = false;
-        cont.forEach(element => {
-            if (element) {
-                esc_color = true;
-            }
-        })
+        let esc_color = saber_esc_color(cont);
+
         arr_jugadores[i] = [parejas, trios, poker, i, esc_real, carta_alta, color, escalera, esc_color];
     }
+}
+
+function limpiar_matriz(matriz) {
+    for (let j = 0; j < 4; j++) {
+        matriz[j] = [];
+        for (let h = 0; h < 13; h++) {
+            matriz[j][h] = 0;
+        }
+    }
+}
+
+function saber_esc_color(arr) {
+    let esc_color = false;
+    arr.forEach(element => {
+        if (element) {
+            esc_color = true;
+        }
+    })
+    return esc_color;
+}
+
+function saber_escalera() {
+    let escalera = false;
+    let seguidos = 0;
+    for (let j = 0; j < 13; j++) {
+        if (rep_y[j] == 1) {
+            seguidos++;
+            if (seguidos == 5) {
+                escalera = true;
+            }
+        } else {
+            seguidos = 0;
+        }
+    }
+    return escalera;
 }
 
 function saber_ganador() {
@@ -133,6 +151,7 @@ function saber_ganador() {
                 puntos = 2;
                 break;
             case 2:
+            case 3:
                 puntos = 3;
                 break;
         }
@@ -176,7 +195,7 @@ function saber_ganador() {
                 ganador[1] = puntos;
                 ganador[2] = jugador[5];
                 empate = false;
-            } else {
+            } else if (ganador[2] == jugador[5]) {
                 empate = true;
             }
         }

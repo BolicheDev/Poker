@@ -17,6 +17,7 @@ function iniciar() {
 }
 
 function mezclar_generar_cartas() {
+    arrGlo.cartas = [];
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 13; j++) {
             var carta = new Clase_carta(Number(j + 1), i + "" + j, i, j);
@@ -40,11 +41,20 @@ function cambiar() {
     repartir_visual();
 }
 
+function empezar_nueva() {
+    document.getElementById("encima-repartir").innerHTML = "";
+    document.getElementById("encima-repartir").style.display = "block";
+    document.getElementById("encima-repartir").style.zIndex = 2;
+    mezclar_generar_cartas();
+    repartir_visual();
+}
+
 function añadir_funcion_botones() {
     document.getElementById("botonLogin").addEventListener("click", cambiar);
     //document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
     document.getElementById("subir").addEventListener("click", activar_jugada);
     document.getElementById("pasar").addEventListener("click", saber_ganador);
+    document.getElementById("retiro").addEventListener("click", empezar_nueva);
     for (let i = 1; i < 9; i++) {
         document.getElementById("j" + i).addEventListener("click", saber_mano);
     }
@@ -132,7 +142,7 @@ function repartir_visual() {
             posicion++;
         }
         veces++;
-    }, 10);
+    }, velocidad());
 }
 
 function repartir_mesa() {
@@ -162,11 +172,11 @@ function repartir_mesa() {
             posicion++;
             if (carta == 6) {
                 clearInterval(intervalo2);
-                document.getElementById("encima-repartir").remove();
+                document.getElementById("encima-repartir").style.display = "none";
             }
         }
         veces++;
-    }, 10);
+    }, velocidad());
 }
 
 function crearUsuario() {
@@ -204,6 +214,10 @@ function saberValor() {
     barra.oninput = function() {
         valor.innerHTML = this.value;
     }
+}
+
+function velocidad() {
+    return document.getElementById("barra").value;
 }
 
 function crearDivs() {
@@ -276,14 +290,14 @@ function crearDivs() {
     /* ------------------------- */
     var hijo2 = document.createElement("input");
     hijo2.setAttribute("type", "range");
-    hijo2.setAttribute("min", "0");
+    hijo2.setAttribute("min", "1");
     hijo2.setAttribute("max", "100");
     hijo2.setAttribute("class", "barra");
-    hijo2.setAttribute("value", "0");
+    hijo2.setAttribute("value", "50");
     hijo2.setAttribute("id", "barra");
     hijo2.setAttribute("onchange", "saberValor()");
     hijo.appendChild(hijo2);
-    hijo.innerHTML += "<h3 id='valorBarra'> 0 </h3>";
+    hijo.innerHTML += "<h6><span id='valorBarra'> 50 </span> velocidad </h6>";
     /* ------------------------- */
     hijo2 = document.createElement("button");
     hijo2.setAttribute("class", "subir");
@@ -301,5 +315,5 @@ function crearDivs() {
     hijo2.setAttribute("class", "retiro");
     hijo2.setAttribute("id", "retiro");
     hijo.appendChild(hijo2);
-    hijo2.innerHTML = "Retiro";
+    hijo2.innerHTML = "Otra partida";
 }
