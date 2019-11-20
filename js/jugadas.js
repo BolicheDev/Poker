@@ -78,7 +78,7 @@ function activar_jugada() {
             }
         }
         /* Saber si es escalera simple */
-        let escalera = saber_escalera();
+        let escalera = saber_escalera(rep_y);
 
         /* Contar parejas, trios, y full */
         let parejas = 0;
@@ -123,7 +123,7 @@ function saber_esc_color(arr) {
     return esc_color;
 }
 
-function saber_escalera() {
+function saber_escalera(rep_y) {
     let escalera = false;
     let seguidos = 0;
     for (let j = 0; j < 13; j++) {
