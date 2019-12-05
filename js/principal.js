@@ -53,7 +53,7 @@ function añadir_funcion_botones() {
     document.getElementById("botonLogin").addEventListener("click", cambiar);
     //document.getElementById("botonRegistro").addEventListener("click", crearUsuario);
     document.getElementById("subir").addEventListener("click", activar_jugada);
-    document.getElementById("pasar").addEventListener("click", saber_ganador);
+    document.getElementById("pasar").addEventListener("click", saberGanadorPatter);
     document.getElementById("retiro").addEventListener("click", empezar_nueva);
     for (let i = 1; i < 9; i++) {
         document.getElementById("j" + i).addEventListener("click", saber_mano);
@@ -293,7 +293,7 @@ function crearDivs() {
     hijo2.setAttribute("min", "1");
     hijo2.setAttribute("max", "100");
     hijo2.setAttribute("class", "barra");
-    hijo2.setAttribute("value", "50");
+    hijo2.setAttribute("value", "5");
     hijo2.setAttribute("id", "barra");
     hijo2.setAttribute("onchange", "saberValor()");
     hijo.appendChild(hijo2);

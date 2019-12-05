@@ -140,6 +140,10 @@ function saber_escalera(rep_y) {
     return escalera;
 }
 
+function saberGanadorPatter() {
+    activeGamePatter();
+}
+
 function saber_ganador() {
     var ganador = [null, -1, 0];
     var empate = false;
